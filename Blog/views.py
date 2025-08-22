@@ -5,3 +5,8 @@ def home_view(request):
 
 def post_view(request):
     return HttpResponse("Hello World - Post")
+
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')
