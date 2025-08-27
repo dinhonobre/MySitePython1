@@ -1,7 +1,4 @@
-{% extends "base.html" %}
-
-{% block title %}Página Inicial{% endblock %}
-
-{% block content %}
-<h2>Bem-vindo ao meu site!</h2>
-{% endblock %}
+{% for post in posts %}
+    <h2><a href="{% url 'Blog:post_detail' post.slug %}">{{ post.titulo }}</a></h2>
+    <p>{{ post.conteudo|truncatewords:20 }}</p>
+{% endfor %}

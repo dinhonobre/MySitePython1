@@ -1,12 +1,12 @@
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from .models import Post
 
-def home_view(request):
-    return HttpResponse("Hello World - Anderson")
-
-def post_view(request):
-    return HttpResponse("Hello World - Post")
-
-from django.shortcuts import render
-
+# Página inicial: mostra apenas posts publicados
 def index(request):
-    return render(request, 'index.html')
+    posts = Post.objects.filter(status='published')
+    return render(request, 'index.html', {'posts': posts})
+
+# Página de detalhe do post usando slug
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    return render(request, 'post_detail.html', {'post': post})
