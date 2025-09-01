@@ -1,12 +1,19 @@
 from django.db import models
 
 class Post(models.Model):
+    STATUS_CHOICES = (
+        ('rascunho', 'Rascunho'),
+        ('publicado', 'Publicado'),
+    )
+
     titulo = models.CharField(max_length=200)
     conteudo = models.TextField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='rascunho')
     data_publicacao = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.titulo
+
 
 class Comentario(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comentarios")

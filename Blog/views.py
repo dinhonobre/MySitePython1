@@ -1,12 +1,6 @@
-from django.http import HttpResponse
-
-def home_view(request):
-    return HttpResponse("Hello World - Anderson")
-
-def post_view(request):
-    return HttpResponse("Hello World - Post")
-
 from django.shortcuts import render
+from .models import Post  # Importa o modelo Post
 
 def index(request):
-    return render(request, 'index.html')
+    posts = Post.objects.all()  # Busca todos os posts no banco de dados
+    return render(request, 'index.html', {'posts': posts})  # Passa para o template

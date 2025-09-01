@@ -1,7 +1,6 @@
-{% extends "base.html" %}
-
-{% block title %}Página Inicial{% endblock %}
-
-{% block content %}
-<h2>Bem-vindo ao meu site!</h2>
-{% endblock %}
+{% for post in posts %}
+    <h2>{{ post.titulo }}</h2>
+    <p>{{ post.conteudo }}</p>
+{% empty %}
+    <p>Nenhuma postagem encontrada.</p>
+{% endfor %}
