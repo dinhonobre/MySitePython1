@@ -1,25 +1,27 @@
 from django.db import models
+from django.utils.text import slugify
 
 class Post(models.Model):
-    STATUS_CHOICES = (
-        ('rascunho', 'Rascunho'),
-        ('publicado', 'Publicado'),
-    )
-
     titulo = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
     conteudo = models.TextField()
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='rascunho')
-    data_publicacao = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(
+        max_length=10,
+        choices=[('rascunho', 'Rascunho'), ('publicado', 'Publicado')]
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.titulo)
+            slug = base_slug
+            counter = 1
+            # Verifica se o slug já existe
+            while Post.objects.filter(slug=slug).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.titulo
-
-
-class Comentario(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comentarios")
-    autor = models.CharField(max_length=100)
-    texto = models.TextField()
-    data_comentario = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.autor} - {self.post.titulo}"

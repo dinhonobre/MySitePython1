@@ -1,6 +1,12 @@
-from django.shortcuts import render
-from .models import Post  # Importa o modelo Post
+from django.shortcuts import render, get_object_or_404
+from .models import Post
 
-def index(request):
-    posts = Post.objects.all()  # Busca todos os posts no banco de dados
-    return render(request, 'index.html', {'posts': posts})  # Passa para o template
+# Lista todos os posts
+def post_list(request):
+    posts = Post.objects.all()
+    return render(request, 'post_list.html', {'posts': posts})
+
+# Detalhe de um post por slug
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    return render(request, 'post_detail.html', {'post': post})

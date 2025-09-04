@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import index  # Só importa a view que realmente existe
+from . import views
 
 urlpatterns = [
-    path('', index, name='index'),  # Aponta a raiz para a view index
-    # Se precisar, você pode criar outras rotas depois
+    path('', views.post_list, name='post_list'),
+    path('post/<slug:slug>/', views.post_detail, name='post_detail'),
 ]

@@ -1,6 +1,18 @@
-{% for post in posts %}
-    <h2>{{ post.titulo }}</h2>
-    <p>{{ post.conteudo }}</p>
-{% empty %}
-    <p>Nenhuma postagem encontrada.</p>
-{% endfor %}
+{% extends 'Blog/base.html' %}
+
+{% block title %}Início - Meu Blog{% endblock %}
+
+{% block content %}
+    <h2>Postagens</h2>
+    <div class="post-list">
+        {% for post in posts %}
+            <div class="post-card">
+                <h3><a href="{% url 'post_detail' slug=post.slug %}">{{ post.titulo }}</a></h3>
+                <p>{{ post.conteudo|truncatewords:20 }}</p>
+                <small>Publicado em {{ post.created_at|date:"d/m/Y" }}</small>
+            </div>
+        {% empty %}
+            <p>Nenhuma postagem publicada ainda.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
