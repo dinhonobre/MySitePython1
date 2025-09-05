@@ -6,9 +6,11 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     conteudo = models.TextField()
     status = models.CharField(
-        max_length=10,
-        choices=[('rascunho', 'Rascunho'), ('publicado', 'Publicado')]
-    )
+    max_length=10,
+    choices=[('rascunho', 'Rascunho'), ('publicado', 'Publicado')],
+    default='rascunho'
+)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
