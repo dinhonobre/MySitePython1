@@ -1,0 +1,28 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'Blog/css/style.css' %}">
+
+    <title>Blog</title>
+</head>
+<body>
+    <h1>Posts do Blog</h1>
+    <ul>
+        {% for post in posts %}
+            <li>
+                {% if post.slug %}
+                    <a href="{% url 'post_detail' slug=post.slug %}">{{ post.titulo }}</a> - 
+                {% else %}
+                    {{ post.titulo }} - 
+                {% endif %}
+                <span class="status {% if post.status == 'publicado' %}publicado{% endif %}">{{ post.status }}</span>
+            </li>
+        {% empty %}
+            <li>Nenhum post disponível</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,7 +1,18 @@
-{% extends "base.html" %}
+{% extends 'Blog/base.html' %}
 
-{% block title %}Página Inicial{% endblock %}
+{% block title %}Início - Meu Blog{% endblock %}
 
 {% block content %}
-<h2>Bem-vindo ao meu site!</h2>
+    <h2>Postagens</h2>
+    <div class="post-list">
+        {% for post in posts %}
+            <div class="post-card">
+                <h3><a href="{% url 'post_detail' slug=post.slug %}">{{ post.titulo }}</a></h3>
+                <p>{{ post.conteudo|truncatewords:20 }}</p>
+                <small>Publicado em {{ post.created_at|date:"d/m/Y" }}</small>
+            </div>
+        {% empty %}
+            <p>Nenhuma postagem publicada ainda.</p>
+        {% endfor %}
+    </div>
 {% endblock %}
