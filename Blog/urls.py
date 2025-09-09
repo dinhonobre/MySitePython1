@@ -1,15 +1,7 @@
 from django.urls import path
-from .views import post_view, home_view
+from .views import home_view, post_view
 
 urlpatterns = [
-    path('', home_view, name='home'),  # rota raiz
-    path('post/', post_view, name='post')
+    path('', home_view, name='home'),
+    path('post/', post_view, name='post'),
 ]
-
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('', views.index, name='index'),
-]
-

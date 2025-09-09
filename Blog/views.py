@@ -1,12 +1,9 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Post
 
 def home_view(request):
-    return HttpResponse("Hello World - Anderson")
+    posts = Post.objects.all()
+    return render(request, "index.html", {"posts": posts})
 
 def post_view(request):
-    return HttpResponse("Hello World - Post")
-
-from django.shortcuts import render
-
-def index(request):
-    return render(request, 'index.html')
+    return render(request, "post.html")
