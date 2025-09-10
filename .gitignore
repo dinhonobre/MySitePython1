@@ -1,2 +1,11 @@
+
 __pycache__/
 *.pyc
+
+# Ignorar arquivos compilados Python
+__pycache__/
+*.pyc
+
+# Ignorar pastas de ambiente virtual
+env/
+
