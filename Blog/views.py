@@ -1,12 +1,23 @@
-from django.http import HttpResponse
 
-def home_view(request):
-    return HttpResponse("Hello World - Anderson")
+from django.shortcuts import render, get_object_or_404
+from .models import Post
 
-def post_view(request):
-    return HttpResponse("Hello World - Post")
+# Lista todos os posts
+def post_list(request):
+    posts = Post.objects.all()
+    return render(request, 'post_list.html', {'posts': posts})
+
+# Detalhe de um post por slug
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    return render(request, 'post_detail.html', {'post': post})
 
 from django.shortcuts import render
+from .models import Post
 
-def index(request):
-    return render(request, 'index.html')
+def home_view(request):
+    posts = Post.objects.all()
+    return render(request, "index.html", {"posts": posts})
+
+def post_view(request):
+    return render(request, "post.html")
