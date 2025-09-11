@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Backend Python - EBAC</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" content="notranslate" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <style>
+    /* Reset básico */
+    html, body {
+        height: 100%;
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        font-size: 17px;
+        background-color: #6b4d4d; /* fundo principal */
+        color: #212529; /* cor do texto */
+    }
+
+    /* Links padrão */
+    a {
+        color: #0B5ED7;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: #0a4db5;
+    }
+
+    /* Cards do Bootstrap */
+    .card {
+        background-color: #ffffff;
+        color: #212529;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #0B5ED7;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #212529;
+    }
+
+    /* Sombra customizada */
+    .shadow {
+        box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Botão perigo */
+    .btn-danger {
+        color: #fff;
+        background-color: #f00000;
+        border-color: #dc281e;
+    }
+
+    .btn-danger:hover {
+        background-color: #c20000;
+        border-color: #a10000;
+    }
+
+    /* Navbar */
+    .navbar {
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Masthead (se usar alguma seção grande) */
+    .masthead {
+        background: #3398E1;
+        height: auto;
+        padding: 15px 0;
+        box-shadow: 0 16px 48px #E3E7EB;
+        color: #fff;
+    }
+
+    /* Rodapé */
+    footer {
+        background-color: #f8f9fa;
+        color: #212529;
+        padding: 15px 0;
+        text-align: center;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+    }
+
+    /* Lista de posts (post_list.html) */
+    ul.posts-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    ul.posts-list li {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 20px;
+        width: 300px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    ul.posts-list li:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    ul.posts-list li a {
+        font-weight: bold;
+        color: #0B5ED7;
+    }
+
+    ul.posts-list li a:hover {
+        text-decoration: underline;
+    }
+
+    /* Badges de status */
+    .status {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-size: 12px;
+        color: #fff;
+    }
+
+    .status.rascunho {
+        background-color: #6c757d;
+    }
+
+    .status.publicado {
+        background-color: #198754;
+    }
+
+    /* Sidebar */
+    .sidebar .card {
+        margin-bottom: 20px;
+    }
+
+    .sidebar .card-header {
+        font-weight: bold;
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+
+    .sidebar .card-body {
+        color: #212529;
+    }
+</style>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'Blog:home' %}">Django Central</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold text-black" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold text-black" href="#">Policy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold text-black" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mt-4">
+        {% block content %}
+        <!-- Conteúdo das páginas -->
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-3 bg-grey text-center">
+        <p class="m-0 text-dark">Backend Python - EBAC</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9e9gqQ8qj3i5piI0QOJL6n9i0CdX0zKVO2D1T" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
