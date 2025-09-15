@@ -1,11 +1,16 @@
 from django.test import TestCase
+from django.contrib.auth.models import User
 from Blog.models import Post, Comentario
 
 class PostModelTest(TestCase):
     def setUp(self):
+        # Criar usuário para o autor do post
+        self.autor = User.objects.create_user(username="teste", password="12345")
+        # Criar post com autor
         self.post = Post.objects.create(
             titulo="Título de Teste",
-            conteudo="Conteúdo do post"
+            conteudo="Conteúdo do post",
+            autor=self.autor
         )
 
     def test_post_criado(self):
@@ -17,10 +22,15 @@ class PostModelTest(TestCase):
 
 class ComentarioModelTest(TestCase):
     def setUp(self):
+        # Criar usuário para o autor do post
+        self.autor = User.objects.create_user(username="teste2", password="12345")
+        # Criar post com autor
         self.post = Post.objects.create(
             titulo="Post para Comentário",
-            conteudo="Texto do post"
+            conteudo="Texto do post",
+            autor=self.autor
         )
+        # Criar comentário
         self.comentario = Comentario.objects.create(
             post=self.post,
             autor="Anderson",
