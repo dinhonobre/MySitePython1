@@ -1,23 +1,16 @@
-
 from django.shortcuts import render, get_object_or_404
 from .models import Post
 
-# Lista todos os posts
+# Página inicial, lista apenas posts publicados
 def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'post_list.html', {'posts': posts})
+    posts = Post.objects.filter(status=1)  # 1 = publicado
+    return render(request, 'Blog/index.html', {'posts': posts})
 
 # Detalhe de um post por slug
 def post_detail(request, slug):
-    post = get_object_or_404(Post, slug=slug)
-    return render(request, 'post_detail.html', {'post': post})
+    post = get_object_or_404(Post, slug=slug, status=1)
+    return render(request, 'Blog/post_detail.html', {'post': post})
 
-from django.shortcuts import render
-from .models import Post
-
+# Home pode ser um alias para post_list
 def home_view(request):
-    posts = Post.objects.all()
-    return render(request, "index.html", {"posts": posts})
-
-def post_view(request):
-    return render(request, "post.html")
+    return post_list(request)

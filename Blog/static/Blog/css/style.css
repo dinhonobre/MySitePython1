@@ -8,10 +8,9 @@
 
 /* Corpo da página */
 body {
-    background-color: #f8f9fa;
-    color: #212529;
-    line-height: 1.6;
-    padding: 20px;
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    background-color: #9e0a0a !important;
 }
 
 /* Título principal */
