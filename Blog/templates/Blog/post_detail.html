@@ -1,6 +1,6 @@
 {% extends 'Blog/base.html' %}
 
-{% block title %}{{ post.title }} - Meu Blog{% endblock %}
+{% block title %}{{ post.titulo }} - Meu Blog{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
@@ -9,12 +9,20 @@
     <div class="col-md-8 mb-4">
       <div class="card shadow-sm">
         <div class="card-body">
-          <h1 class="card-title">{{ post.title }}</h1>
+          <!-- Título do post -->
+          <h1 class="card-title">{{ post.titulo }}</h1>
+
+          <!-- Autor e data de publicação -->
           <p class="text-muted">
-            Por {{ post.author.username }} | {{ post.created_on|date:"d/m/Y H:i" }}
+            Por {{ post.autor.username }} | {{ post.data_publicacao|date:"d/m/Y H:i" }}
           </p>
+
           <hr>
-          <div class="card-text">{{ post.content|safe }}</div>
+
+          <!-- Conteúdo do post -->
+          <div class="card-text">
+            {{ post.conteudo|safe }}
+          </div>
         </div>
       </div>
     </div>
@@ -23,7 +31,6 @@
     <div class="col-md-4">
       {% include 'Blog/sidebar.html' %}
     </div>
-
   </div>
 </div>
 {% endblock %}
